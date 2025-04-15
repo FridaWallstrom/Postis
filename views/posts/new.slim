@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title Create Post
+    link rel="stylesheet" href="/style.css"
+  
+  body
+    .container
+      .form-card
+        button.back-button(onclick="history.back()")
+          i.arrow-left
+          | Back
+        
+        h2.form-title Create Post
+        
+        form action="/posts" method="post"
+          .form-group
+            label for="header" Title
+            input.form-control type="text" id="header" name="header" placeholder="Header of post" required=""
+          
+          .form-group
+            label for="content" Content
+            textarea.form-control id="content" name="content" placeholder="Content of post" required="" 
+          
+          .categories-section
+            h3 Categories
+            .categories-container
+              - categories.each do |category|
+                .category-checkbox
+                  input.custom-checkbox id="input_#{category}" type="checkbox" name="categories[]" value="#{category}"
+                  label.checkbox-label for="input_#{category}" #{category.capitalize}
+          
+          input type="hidden" name="id" value="#{id}"
+          
+          .form-actions
+            button.submit-btn type="submit" Create Post
